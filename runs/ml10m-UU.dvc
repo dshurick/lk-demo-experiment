@@ -1,12 +1,9 @@
-md5: 05fd7cee20c9f4e7ac61959806688752
+md5: 24b54d4891c32eb9f109e25bfeb3538f
 cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-UU UU
 wdir: ..
 deps:
-- md5: 8fd1377974edc5aadb4994ffff7c7131.dir
+- md5: b65bf882ee696c1e253026b62b804d82.dir
   path: data-split/ml10m
 outs:
-- md5: e37414dd7ee3f9df11ed5ddfc0c18452.dir
+- md5: 3c3f71582eb2604a3ae60f421c94489b.dir
   path: runs/ml10m-UU
-  cache: true
-  metric: false
-  persist: false

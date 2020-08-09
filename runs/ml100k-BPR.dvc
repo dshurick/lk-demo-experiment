@@ -1,13 +1,10 @@
-md5: 3554a8b2c3a0bf28bb962012fc09b494
+md5: 9895d1917d3ff041657f8f1b7a60c828
 cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-BPR --no-predict
   BPR
 wdir: ..
 deps:
-- md5: c3ee128c9719ac7520f29b4f5aa74137.dir
+- md5: 55951c89e81d9e0ed82fafa959d8cc27.dir
   path: data-split/ml100k
 outs:
-- md5: b8dfc81b60fb8d62a02efdcfb18fe40b.dir
+- md5: 7e5352b3f2174f9e34c4a6295c4f26e6.dir
   path: runs/ml100k-BPR
-  cache: true
-  metric: false
-  persist: false

@@ -2,11 +2,7 @@ cmd: python ../unpack-data.py ml-10m.zip
 deps:
 - md5: ce571fd55effeba0271552578f2648bd
   path: ml-10m.zip
-md5: 2355ff3b90e7743039882809f02376ee
+md5: e94fd65efe99c2bd50137b72b338bda0
 outs:
-- cache: true
-  md5: 0ff97e7caebfc577216e762ec5266cfd.dir
-  metric: false
+- md5: 0ff97e7caebfc577216e762ec5266cfd.dir
   path: ml-10M100K
-  persist: false
-wdir: .

@@ -1,12 +1,9 @@
-md5: d8a5c34e1798cdb7d33306a09d5aecc2
+md5: 05b4c5725f7cd462a6e27059f7c09059
 cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-UU UU
 wdir: ..
 deps:
-- md5: c3ee128c9719ac7520f29b4f5aa74137.dir
+- md5: 55951c89e81d9e0ed82fafa959d8cc27.dir
   path: data-split/ml100k
 outs:
-- md5: 6050550fbf1e820fb3b5ae70d9eccaaf.dir
+- md5: 3a0923b0560e774508c61b67f70a368f.dir
   path: runs/ml100k-UU
-  cache: true
-  metric: false
-  persist: false

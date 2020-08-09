@@ -1,13 +1,10 @@
-md5: 83b4a8fcde5b1d82f0199d00ba272faa
+md5: 37337f6f5a05376a212b5b7618a9c225
 cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-TFMF --log-file runs/ml10m-TFMF.log
   TFMF
 wdir: ..
 deps:
-- md5: 8fd1377974edc5aadb4994ffff7c7131.dir
+- md5: b65bf882ee696c1e253026b62b804d82.dir
   path: data-split/ml10m
 outs:
-- md5: bd2788dbc80d642cb79d36d2870fa3c1.dir
+- md5: 18ad4d8f81730e5eb6f958045e60a330.dir
   path: runs/ml10m-TFMF
-  cache: true
-  metric: false
-  persist: false
