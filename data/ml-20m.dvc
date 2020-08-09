@@ -4,11 +4,8 @@ deps:
   path: data/ml-20m.zip
 - md5: c9f8423d36c0be1c42fed36a1ed101b6
   path: unpack-data.py
-md5: 21fc82da112b2ae22caa6e13ee578417
+md5: 4cceb1abe30f7c2c930c96251ecd2227
 outs:
-- cache: true
-  md5: c330ca8a1a4009f53451a8aeaa325d91.dir
-  metric: false
+- md5: c330ca8a1a4009f53451a8aeaa325d91.dir
   path: data/ml-20m
-  persist: false
 wdir: ..
