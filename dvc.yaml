@@ -1,0 +1,22 @@
+stages:
+  unpack-ml-25m:
+    cmd: python unpack-data.py data/ml-25m.zip data
+    deps:
+    - data/ml-25m.zip
+    - unpack-data.py
+    outs:
+    - data/ml-25m
+  split-ml-25m:
+    cmd: python split-data.py -o data-split/ml25m ml25m
+    deps:
+    - data/ml-25m/ratings.csv
+    - split-data.py
+    outs:
+    - data-split/ml25m
+  ml25m-ALS:
+    cmd: python run-algo.py --splits data-split/ml25m -o runs/ml25m-ALS ALS
+    deps:
+    - data-split/ml25m
+    - run-algo.py
+    outs:
+    - runs/ml25m-ALS

@@ -1,0 +1,30 @@
+unpack-ml-25m:
+  cmd: python unpack-data.py data/ml-25m.zip data
+  deps:
+  - path: data/ml-25m.zip
+    md5: 6b51fb2759a8657d3bfcbfc42b592ada
+  - path: unpack-data.py
+    md5: c9f8423d36c0be1c42fed36a1ed101b6
+  outs:
+  - path: data/ml-25m
+    md5: 5b3efd91c9cc6cd155a70787b9c2f4cf.dir
+split-ml-25m:
+  cmd: python split-data.py -o data-split/ml25m ml25m
+  deps:
+  - path: data/ml-25m/ratings.csv
+    md5: d463ba41e49011f510bbc0ea5224a169
+  - path: split-data.py
+    md5: 1d60e01caee7282327d4d9a941757857
+  outs:
+  - path: data-split/ml25m
+    md5: 5ac9c987f282a9270f32476dbe172293.dir
+ml25m-ALS:
+  cmd: python run-algo.py --splits data-split/ml25m -o runs/ml25m-ALS ALS
+  deps:
+  - path: data-split/ml25m
+    md5: 5ac9c987f282a9270f32476dbe172293.dir
+  - path: run-algo.py
+    md5: 636f6f7768ce784cc6abea10bf999928
+  outs:
+  - path: runs/ml25m-ALS
+    md5: ef467b68351c5b30c1375adaec64550e.dir
