@@ -28,3 +28,113 @@ ml25m-ALS:
   outs:
   - path: runs/ml25m-ALS
     md5: ef467b68351c5b30c1375adaec64550e.dir
+download-ml-latest-small:
+  cmd: wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip -O data/ml-latest-small.zip
+  deps:
+  - path: http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
+    etag: '"eed1a-598cfd387dc5a"'
+  outs:
+  - path: data/ml-latest-small.zip
+    md5: 31a303aabbc519bd33d025e44d6c2570
+unpack-ml-latest-small:
+  cmd: python unpack-data.py data/ml-latest-small.zip data
+  deps:
+  - path: data/ml-latest-small.zip
+    md5: 31a303aabbc519bd33d025e44d6c2570
+  - path: unpack-data.py
+    md5: 77646d117eb1036816ef669d61b8d72b
+  outs:
+  - path: data/ml-latest-small
+    md5: c4679a5c26767acd3f6d42cdf57bc0e7.dir
+split-ml-latest-small:
+  cmd: python split-data.py -o data-split/mlsmall mlsmall
+  deps:
+  - path: data/ml-latest-small
+    md5: c4679a5c26767acd3f6d42cdf57bc0e7.dir
+  - path: split-data.py
+    md5: 1d60e01caee7282327d4d9a941757857
+  outs:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+mlsmall-ALS:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-ALS ALS
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 7c6e92a48f9e22c8dee93ab7a9184270
+  outs:
+  - path: runs/mlsmall-ALS
+    md5: ba7093d4bc8f37a776b6ffa6640bcc0c.dir
+mlsmall-Bias:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-Bias Bias
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-Bias
+    md5: cb980560c34ae15e0f52211c7cf98351.dir
+mlsmall-BPR:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-BPR --no-predict
+    BPR
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-BPR
+    md5: 8652cd39d1817e41707797c2342fe65f.dir
+mlsmall-IALS:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-IALS --no-predict
+    IALS
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-IALS
+    md5: 61883f7be346f19ebc37b4b4768a77c9.dir
+mlsmall-II:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-II II
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-II
+    md5: 29289c34a0a3f19dd2b4281b74966a2d.dir
+mlsmall-Pop:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-Pop Pop
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-Pop
+    md5: ed97463638cd525e186ca0011bdc2f3d.dir
+mlsmall-TFMF:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-TFMF TFMF
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-TFMF
+    md5: ebb2976db53ff9a4ccb5aa877aefd223.dir
+mlsmall-UU:
+  cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-UU UU
+  deps:
+  - path: data-split/mlsmall
+    md5: 18c15a57162a194c5c942cebb393a18a.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/mlsmall-UU
+    md5: 4e0a06b0856c0aac0779f4fbabbb411b.dir

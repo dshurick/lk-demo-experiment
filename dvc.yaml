@@ -20,3 +20,82 @@ stages:
     - run-algo.py
     outs:
     - runs/ml25m-ALS
+  download-ml-latest-small:
+    cmd: wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip -O
+      data/ml-latest-small.zip
+    deps:
+    - http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
+    outs:
+    - data/ml-latest-small.zip
+  unpack-ml-latest-small:
+    cmd: python unpack-data.py data/ml-latest-small.zip data
+    deps:
+    - data/ml-latest-small.zip
+    - unpack-data.py
+    outs:
+    - data/ml-latest-small
+  split-ml-latest-small:
+    cmd: python split-data.py -o data-split/mlsmall mlsmall
+    deps:
+    - data/ml-latest-small
+    - split-data.py
+    outs:
+    - data-split/mlsmall
+  mlsmall-ALS:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-ALS ALS
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-ALS
+  mlsmall-Bias:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-Bias Bias
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-Bias
+  mlsmall-BPR:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-BPR --no-predict
+      BPR
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-BPR
+  mlsmall-IALS:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-IALS --no-predict
+      IALS
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-IALS
+  mlsmall-II:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-II II
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-II
+  mlsmall-Pop:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-Pop Pop
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-Pop
+  mlsmall-TFMF:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-TFMF TFMF
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-TFMF
+  mlsmall-UU:
+    cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-UU UU
+    deps:
+    - data-split/mlsmall
+    - run-algo.py
+    outs:
+    - runs/mlsmall-UU
