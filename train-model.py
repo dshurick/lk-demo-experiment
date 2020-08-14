@@ -11,11 +11,12 @@ Options:
   DATASET       name of data set to load
 """
 
-from docopt import docopt
-import pathlib
-import importlib
 import gzip
+import importlib
+import pathlib
 import pickle
+
+from docopt import docopt
 
 try:
     import resource

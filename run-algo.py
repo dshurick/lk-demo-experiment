@@ -15,14 +15,15 @@ Options:
     ALGO            name of algorithm to load
 """
 
-from docopt import docopt
-from pathlib import Path
-from lenskit.algorithms import Recommender, Predictor
-from lenskit import batch, util
-from lkdemo import log, datasets
-
 import importlib
+from pathlib import Path
+
 import pandas as pd
+from docopt import docopt
+from lenskit import batch, util
+from lenskit.algorithms import Recommender, Predictor
+
+from lkdemo import log, datasets
 
 
 def main(args):

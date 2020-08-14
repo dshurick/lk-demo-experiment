@@ -11,20 +11,22 @@ import zipfile
 from lkdemo import log
 from docopt import docopt
 
+
 def main(args):
-    zfname = args['<zip-file>']
-    dir = args.get('<dest-dir>', None)
+    zfname = args["<zip-file>"]
+    dir = args.get("<dest-dir>", None)
     if dir is None:
-        dir = '.'
+        dir = "."
     if not os.path.exists(dir):
         os.mkdir(dir)
 
     with zipfile.ZipFile(zfname) as zf:
         for member in zf.namelist():
-            print('extracting', member)
+            print("extracting", member)
             zf.extract(member, path=dir)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     _log = log.script(__file__)
     args = docopt(__doc__)
     main(args)
