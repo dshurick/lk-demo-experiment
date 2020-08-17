@@ -12,3 +12,6 @@ __pycache__
 .magicindex.json
 /ml-latest-small.zip
 .idea/
+/eval-report.ml100k.ipynb
+/eval-report.ml1m.ipynb
+/eval-report.ml10m.ipynb

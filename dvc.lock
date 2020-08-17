@@ -1,33 +1,3 @@
-unpack-ml-25m:
-  cmd: python unpack-data.py data/ml-25m.zip data
-  deps:
-  - path: data/ml-25m.zip
-    md5: 6b51fb2759a8657d3bfcbfc42b592ada
-  - path: unpack-data.py
-    md5: c9f8423d36c0be1c42fed36a1ed101b6
-  outs:
-  - path: data/ml-25m
-    md5: 5b3efd91c9cc6cd155a70787b9c2f4cf.dir
-split-ml-25m:
-  cmd: python split-data.py -o data-split/ml25m ml25m
-  deps:
-  - path: data/ml-25m/ratings.csv
-    md5: d463ba41e49011f510bbc0ea5224a169
-  - path: split-data.py
-    md5: 1d60e01caee7282327d4d9a941757857
-  outs:
-  - path: data-split/ml25m
-    md5: 5ac9c987f282a9270f32476dbe172293.dir
-ml25m-ALS:
-  cmd: python run-algo.py --splits data-split/ml25m -o runs/ml25m-ALS ALS
-  deps:
-  - path: data-split/ml25m
-    md5: 5ac9c987f282a9270f32476dbe172293.dir
-  - path: run-algo.py
-    md5: 636f6f7768ce784cc6abea10bf999928
-  outs:
-  - path: runs/ml25m-ALS
-    md5: ef467b68351c5b30c1375adaec64550e.dir
 download-ml-latest-small:
   cmd: wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip -O data/ml-latest-small.zip
   deps:
@@ -52,10 +22,10 @@ split-ml-latest-small:
   - path: data/ml-latest-small
     md5: c4679a5c26767acd3f6d42cdf57bc0e7.dir
   - path: split-data.py
-    md5: 1d60e01caee7282327d4d9a941757857
+    md5: 66e0c571225bc099557294ff4d3164c9
   outs:
   - path: data-split/mlsmall
-    md5: 18c15a57162a194c5c942cebb393a18a.dir
+    md5: 56e279330d8dcdfd40e4fb75d5d95285.dir
 mlsmall-ALS:
   cmd: python run-algo.py --splits data-split/mlsmall -o runs/mlsmall-ALS ALS
   deps:
@@ -138,3 +108,395 @@ mlsmall-UU:
   outs:
   - path: runs/mlsmall-UU
     md5: 4e0a06b0856c0aac0779f4fbabbb411b.dir
+download-ml-100k:
+  cmd: wget http://files.grouplens.org/datasets/movielens/ml-100k.zip -O data/ml-100k.zip
+  deps:
+  - path: http://files.grouplens.org/datasets/movielens/ml-100k.zip
+    etag: '"4b227d-598cfd31b571f"'
+  outs:
+  - path: data/ml-100k.zip
+    md5: 0e33842e24a9c977be4e0107933c0723
+unpack-ml-100k:
+  cmd: python unpack-data.py data/ml-100k.zip data
+  deps:
+  - path: data/ml-100k.zip
+    md5: 0e33842e24a9c977be4e0107933c0723
+  - path: unpack-data.py
+    md5: 77646d117eb1036816ef669d61b8d72b
+  outs:
+  - path: data/ml-100k
+    md5: 33e3b98f41ab1289116f74de90b95a24.dir
+split-ml-100k:
+  cmd: python split-data.py -o data-split/ml100k ml100k
+  deps:
+  - path: data/ml-100k
+    md5: 33e3b98f41ab1289116f74de90b95a24.dir
+  - path: split-data.py
+    md5: 66e0c571225bc099557294ff4d3164c9
+  outs:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+ml100k-ALS:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-ALS ALS
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-ALS
+    md5: 58325aa26beb95c0c12406bb9d0c487b.dir
+ml100k-Bias:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-Bias Bias
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-Bias
+    md5: 9938f7fc617a3288a9374bff3f8021fb.dir
+ml100k-BPR:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-BPR BPR
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-BPR
+    md5: cfc0bc980daebd5179b015d3cbc86184.dir
+ml100k-IALS:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-IALS IALS
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-IALS
+    md5: 9fb26508170147a9e94b7ce01dbc047c.dir
+ml100k-II:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-II II
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-II
+    md5: b63d9e2dc99d8b65b03b61e19393ccea.dir
+ml100k-Pop:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-Pop Pop
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-Pop
+    md5: f3f69754fcf1c3a24f78be5995d0dfec.dir
+ml100k-TFMF:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-TFMF TFMF
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-TFMF
+    md5: ff42553ca27d0bf14c263ead66f9f64d.dir
+ml100k-UU:
+  cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-UU UU
+  deps:
+  - path: data-split/ml100k
+    md5: 31d482e70e43b4759c5f382500dec9af.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml100k-UU
+    md5: c94ee036ac44b7e51063c5c0cbb44700.dir
+eval-report-ml100k-ipynb:
+  cmd: papermill -r dataset ml100k eval-report.ipynb eval-report.ml100k.ipynb -k lk-demo
+  deps:
+  - path: runs/ml100k-ALS
+    md5: f5ffbb6074571e5568f4500e4ab2880f.dir
+  - path: runs/ml100k-BPR
+    md5: cfc0bc980daebd5179b015d3cbc86184.dir
+  - path: runs/ml100k-Bias
+    md5: 9938f7fc617a3288a9374bff3f8021fb.dir
+  - path: runs/ml100k-IALS
+    md5: 9fb26508170147a9e94b7ce01dbc047c.dir
+  - path: runs/ml100k-II
+    md5: b63d9e2dc99d8b65b03b61e19393ccea.dir
+  - path: runs/ml100k-Pop
+    md5: f3f69754fcf1c3a24f78be5995d0dfec.dir
+  - path: runs/ml100k-TFMF
+    md5: ff42553ca27d0bf14c263ead66f9f64d.dir
+  - path: runs/ml100k-UU
+    md5: c94ee036ac44b7e51063c5c0cbb44700.dir
+  outs:
+  - path: eval-report.ml100k.ipynb
+    md5: 700b5c71af138aca76ef84153c3ebab2
+download-ml-1m:
+  cmd: wget http://files.grouplens.org/datasets/movielens/ml-1m.zip -O data/ml-1m.zip
+  deps:
+  - path: http://files.grouplens.org/datasets/movielens/ml-1m.zip
+    etag: '"5a4b6d-598cfd38b04f2"'
+  outs:
+  - path: data/ml-1m.zip
+    md5: c4d9eecfca2ab87c1945afe126590906
+unpack-ml-1m:
+  cmd: python unpack-data.py data/ml-1m.zip data
+  deps:
+  - path: data/ml-1m.zip
+    md5: c4d9eecfca2ab87c1945afe126590906
+  - path: unpack-data.py
+    md5: 77646d117eb1036816ef669d61b8d72b
+  outs:
+  - path: data/ml-1m
+    md5: 82cb2289085c2178418e006f69afc645.dir
+split-ml-1m:
+  cmd: python split-data.py -o data-split/ml1m ml1m
+  deps:
+  - path: data/ml-1m
+    md5: 82cb2289085c2178418e006f69afc645.dir
+  - path: split-data.py
+    md5: 66e0c571225bc099557294ff4d3164c9
+  outs:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+ml1m-ALS:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-ALS ALS
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-ALS
+    md5: 20cf29a8865653444b6919de4c743aac.dir
+ml1m-Bias:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-Bias Bias
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-Bias
+    md5: a629d03c68ae427f8221daf2fc064eb6.dir
+ml1m-BPR:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-BPR BPR
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-BPR
+    md5: 9a5e4dd326190356d546c57ae879370f.dir
+ml1m-IALS:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-IALS IALS
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-IALS
+    md5: 1333c327e0ec9773dcbb75440ddf9f64.dir
+ml1m-II:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-II II
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-II
+    md5: 5b256a0f8f31f0e46666caf4be705b15.dir
+ml1m-Pop:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-Pop Pop
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-Pop
+    md5: 75455ec2055c23d8572cc06d7db11a52.dir
+ml1m-TFMF:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-TFMF TFMF
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-TFMF
+    md5: 511a33f21bf2c7c1be4e2ff310d59a7d.dir
+ml1m-UU:
+  cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-UU UU
+  deps:
+  - path: data-split/ml1m
+    md5: 72326c9d621b9046ce5d99a5c8e3055e.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml1m-UU
+    md5: a73a99474782d347011f64e2511b4b6d.dir
+eval-report-ml1m-ipynb:
+  cmd: papermill -r dataset ml1m eval-report.ipynb eval-report.ml1m.ipynb -k lk-demo
+  deps:
+  - path: runs/ml1m-ALS
+    md5: 20cf29a8865653444b6919de4c743aac.dir
+  - path: runs/ml1m-BPR
+    md5: 9a5e4dd326190356d546c57ae879370f.dir
+  - path: runs/ml1m-Bias
+    md5: a629d03c68ae427f8221daf2fc064eb6.dir
+  - path: runs/ml1m-IALS
+    md5: 1333c327e0ec9773dcbb75440ddf9f64.dir
+  - path: runs/ml1m-II
+    md5: 5b256a0f8f31f0e46666caf4be705b15.dir
+  - path: runs/ml1m-Pop
+    md5: 75455ec2055c23d8572cc06d7db11a52.dir
+  - path: runs/ml1m-TFMF
+    md5: 511a33f21bf2c7c1be4e2ff310d59a7d.dir
+  - path: runs/ml1m-UU
+    md5: a73a99474782d347011f64e2511b4b6d.dir
+  outs:
+  - path: eval-report.ml1m.ipynb
+    md5: 69826fadba56784f90c3751bb2cd5645
+download-ml-10m:
+  cmd: wget http://files.grouplens.org/datasets/movielens/ml-10m.zip -O data/ml-10m.zip
+  deps:
+  - path: http://files.grouplens.org/datasets/movielens/ml-10m.zip
+    etag: '"3e875b9-598cfd2c58a4b"'
+  outs:
+  - path: data/ml-10m.zip
+    md5: ce571fd55effeba0271552578f2648bd
+unpack-ml-10m:
+  cmd: python unpack-data.py data/ml-10m.zip data
+  deps:
+  - path: data/ml-10m.zip
+    md5: ce571fd55effeba0271552578f2648bd
+  - path: unpack-data.py
+    md5: 77646d117eb1036816ef669d61b8d72b
+  outs:
+  - path: data/ml-10M100K
+    md5: 0ff97e7caebfc577216e762ec5266cfd.dir
+split-ml-10m:
+  cmd: python split-data.py -o data-split/ml10m ml10m
+  deps:
+  - path: data/ml-10M100K
+    md5: 0ff97e7caebfc577216e762ec5266cfd.dir
+  - path: split-data.py
+    md5: 66e0c571225bc099557294ff4d3164c9
+  outs:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+ml10m-ALS:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-ALS ALS
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-ALS
+    md5: 4cd731237533e1315bd50f9d7429fe8e.dir
+ml10m-Bias:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-Bias Bias
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-Bias
+    md5: 7650e57a98e054d47f95e9a2e9eaa4ce.dir
+ml10m-BPR:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-BPR --no-predict
+    BPR
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-BPR
+    md5: 55c82120f543486bcbed3f79402d2302.dir
+ml10m-IALS:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-IALS --no-predict
+    IALS
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-IALS
+    md5: dd0789a0f6871ed093523a703e4bbe8e.dir
+ml10m-II:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-II II
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-II
+    md5: 54633b26c688498db946fe9f4c5ce2b4.dir
+ml10m-Pop:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-Pop Pop
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-Pop
+    md5: eb515c3c63b64c5937bbc7987afeda4c.dir
+ml10m-TFMF:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-TFMF TFMF
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-TFMF
+    md5: 0690dd8f470a487b2b8d9db28757d98e.dir
+ml10m-UU:
+  cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-UU UU
+  deps:
+  - path: data-split/ml10m
+    md5: a6a726c7da01553133e8163ca72a6662.dir
+  - path: run-algo.py
+    md5: 3982c6a60afbb92e67eae9d15ba866b2
+  outs:
+  - path: runs/ml10m-UU
+    md5: ed6bbdd2b36d08366b66e9d1fe7b0abd.dir
+eval-report-ml10m-ipynb:
+  cmd: papermill -r dataset ml10m eval-report.ipynb eval-report.ml10m.ipynb -k lk-demo
+  deps:
+  - path: runs/ml10m-ALS
+    md5: 4cd731237533e1315bd50f9d7429fe8e.dir
+  - path: runs/ml10m-BPR
+    md5: 55c82120f543486bcbed3f79402d2302.dir
+  - path: runs/ml10m-Bias
+    md5: 7650e57a98e054d47f95e9a2e9eaa4ce.dir
+  - path: runs/ml10m-IALS
+    md5: dd0789a0f6871ed093523a703e4bbe8e.dir
+  - path: runs/ml10m-II
+    md5: 54633b26c688498db946fe9f4c5ce2b4.dir
+  - path: runs/ml10m-Pop
+    md5: eb515c3c63b64c5937bbc7987afeda4c.dir
+  - path: runs/ml10m-TFMF
+    md5: 0690dd8f470a487b2b8d9db28757d98e.dir
+  - path: runs/ml10m-UU
+    md5: ed6bbdd2b36d08366b66e9d1fe7b0abd.dir
+  outs:
+  - path: eval-report.ml10m.ipynb
+    md5: 99ee69f52cf8f6af8709d8b90393fad4

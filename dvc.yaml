@@ -1,25 +1,4 @@
 stages:
-  unpack-ml-25m:
-    cmd: python unpack-data.py data/ml-25m.zip data
-    deps:
-    - data/ml-25m.zip
-    - unpack-data.py
-    outs:
-    - data/ml-25m
-  split-ml-25m:
-    cmd: python split-data.py -o data-split/ml25m ml25m
-    deps:
-    - data/ml-25m/ratings.csv
-    - split-data.py
-    outs:
-    - data-split/ml25m
-  ml25m-ALS:
-    cmd: python run-algo.py --splits data-split/ml25m -o runs/ml25m-ALS ALS
-    deps:
-    - data-split/ml25m
-    - run-algo.py
-    outs:
-    - runs/ml25m-ALS
   download-ml-latest-small:
     cmd: wget http://files.grouplens.org/datasets/movielens/ml-latest-small.zip -O
       data/ml-latest-small.zip
@@ -99,3 +78,273 @@ stages:
     - run-algo.py
     outs:
     - runs/mlsmall-UU
+  download-ml-100k:
+    cmd: wget http://files.grouplens.org/datasets/movielens/ml-100k.zip -O data/ml-100k.zip
+    deps:
+    - http://files.grouplens.org/datasets/movielens/ml-100k.zip
+    outs:
+    - data/ml-100k.zip
+  unpack-ml-100k:
+    cmd: python unpack-data.py data/ml-100k.zip data
+    deps:
+    - data/ml-100k.zip
+    - unpack-data.py
+    outs:
+    - data/ml-100k
+  split-ml-100k:
+    cmd: python split-data.py -o data-split/ml100k ml100k
+    deps:
+    - data/ml-100k
+    - split-data.py
+    outs:
+    - data-split/ml100k
+  ml100k-ALS:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-ALS ALS
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-ALS
+  ml100k-Bias:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-Bias Bias
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-Bias
+  ml100k-BPR:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-BPR BPR
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-BPR
+  ml100k-IALS:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-IALS IALS
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-IALS
+  ml100k-II:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-II II
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-II
+  ml100k-Pop:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-Pop Pop
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-Pop
+  ml100k-TFMF:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-TFMF TFMF
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-TFMF
+  ml100k-UU:
+    cmd: python run-algo.py --splits data-split/ml100k -o runs/ml100k-UU UU
+    deps:
+    - data-split/ml100k
+    - run-algo.py
+    outs:
+    - runs/ml100k-UU
+  eval-report-ml100k-ipynb:
+    cmd: papermill -r dataset ml100k eval-report.ipynb eval-report.ml100k.ipynb -k
+      lk-demo
+    deps:
+    - runs/ml100k-ALS
+    - runs/ml100k-BPR
+    - runs/ml100k-Bias
+    - runs/ml100k-IALS
+    - runs/ml100k-II
+    - runs/ml100k-Pop
+    - runs/ml100k-TFMF
+    - runs/ml100k-UU
+    outs:
+    - eval-report.ml100k.ipynb
+  download-ml-1m:
+    cmd: wget http://files.grouplens.org/datasets/movielens/ml-1m.zip -O data/ml-1m.zip
+    deps:
+    - http://files.grouplens.org/datasets/movielens/ml-1m.zip
+    outs:
+    - data/ml-1m.zip
+  unpack-ml-1m:
+    cmd: python unpack-data.py data/ml-1m.zip data
+    deps:
+    - data/ml-1m.zip
+    - unpack-data.py
+    outs:
+    - data/ml-1m
+  split-ml-1m:
+    cmd: python split-data.py -o data-split/ml1m ml1m
+    deps:
+    - data/ml-1m
+    - split-data.py
+    outs:
+    - data-split/ml1m
+  ml1m-ALS:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-ALS ALS
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-ALS
+  ml1m-Bias:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-Bias Bias
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-Bias
+  ml1m-BPR:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-BPR BPR
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-BPR
+  ml1m-IALS:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-IALS IALS
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-IALS
+  ml1m-II:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-II II
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-II
+  ml1m-Pop:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-Pop Pop
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-Pop
+  ml1m-TFMF:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-TFMF TFMF
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-TFMF
+  ml1m-UU:
+    cmd: python run-algo.py --splits data-split/ml1m -o runs/ml1m-UU UU
+    deps:
+    - data-split/ml1m
+    - run-algo.py
+    outs:
+    - runs/ml1m-UU
+  eval-report-ml1m-ipynb:
+    cmd: papermill -r dataset ml1m eval-report.ipynb eval-report.ml1m.ipynb -k lk-demo
+    deps:
+    - runs/ml1m-ALS
+    - runs/ml1m-BPR
+    - runs/ml1m-Bias
+    - runs/ml1m-IALS
+    - runs/ml1m-II
+    - runs/ml1m-Pop
+    - runs/ml1m-TFMF
+    - runs/ml1m-UU
+    outs:
+    - eval-report.ml1m.ipynb
+  download-ml-10m:
+    cmd: wget http://files.grouplens.org/datasets/movielens/ml-10m.zip -O data/ml-10m.zip
+    deps:
+    - http://files.grouplens.org/datasets/movielens/ml-10m.zip
+    outs:
+    - data/ml-10m.zip
+  unpack-ml-10m:
+    cmd: python unpack-data.py data/ml-10m.zip data
+    deps:
+    - data/ml-10m.zip
+    - unpack-data.py
+    outs:
+    - data/ml-10M100K
+  split-ml-10m:
+    cmd: python split-data.py -o data-split/ml10m ml10m
+    deps:
+    - data/ml-10M100K
+    - split-data.py
+    outs:
+    - data-split/ml10m
+  ml10m-ALS:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-ALS ALS
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-ALS
+  ml10m-Bias:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-Bias Bias
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-Bias
+  ml10m-BPR:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-BPR --no-predict
+      BPR
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-BPR
+  ml10m-IALS:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-IALS --no-predict
+      IALS
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-IALS
+  ml10m-II:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-II II
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-II
+  ml10m-Pop:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-Pop Pop
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-Pop
+  ml10m-TFMF:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-TFMF TFMF
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-TFMF
+  ml10m-UU:
+    cmd: python run-algo.py --splits data-split/ml10m -o runs/ml10m-UU UU
+    deps:
+    - data-split/ml10m
+    - run-algo.py
+    outs:
+    - runs/ml10m-UU
+  eval-report-ml10m-ipynb:
+    cmd: papermill -r dataset ml10m eval-report.ipynb eval-report.ml10m.ipynb -k lk-demo
+    deps:
+    - runs/ml10m-ALS
+    - runs/ml10m-BPR
+    - runs/ml10m-Bias
+    - runs/ml10m-IALS
+    - runs/ml10m-II
+    - runs/ml10m-Pop
+    - runs/ml10m-TFMF
+    - runs/ml10m-UU
+    outs:
+    - eval-report.ml10m.ipynb
